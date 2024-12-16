@@ -1,0 +1,11 @@
+name: kaizen_nutrition
+channels:
+  - conda-forge
+dependencies:
+  - flask
+  - sqlalchemy
+  - requests
+  - matplotlib
+  - pandas
+  - jinja2
+  - pytest
