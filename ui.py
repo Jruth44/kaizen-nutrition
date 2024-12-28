@@ -1,5 +1,6 @@
 # ui.py
 import streamlit as st
+import json
 from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode, DataReturnMode
 from models import NutritionCoach
 from utils import save_user_data, create_weekly_schedule
@@ -149,17 +150,15 @@ def display_group_page(users):
 def display_profile_page(users):
     st.header("User Profile")
 
-    # Select user (for now, let's assume a single user for simplicity)
-    # In a real app, you'd have a login system and user selection
-    user_id = "user1"  # Replace with actual user ID later
-
+    user_id = "user1"  # Replace with actual user ID logic
     if user_id not in users:
         users[user_id] = {
             "profile": {},
-            "meals": {}  # Initialize meals data for the new user
+            "meals": {},
+            "food_log": [],
+            "coach_chat": []
         }
 
-    # Get the user's profile data
     user_profile = users[user_id]["profile"]
 
     # --- Profile Form ---
@@ -169,7 +168,11 @@ def display_profile_page(users):
         weight = st.number_input("Weight (lbs)", min_value=0.0, value=float(user_profile.get("weight", 0.0)))
         height = st.number_input("Height (inches)", min_value=0, value=user_profile.get("height", 0))
         age = st.number_input("Age", min_value=0, value=user_profile.get("age", 0))
-        biological_sex = st.selectbox("Biological Sex", ["Male", "Female"], index=["Male", "Female"].index(user_profile.get("biological_sex")) if user_profile.get("biological_sex") else 0)
+        biological_sex = st.selectbox(
+            "Biological Sex", 
+            ["Male", "Female"], 
+            index=["Male", "Female"].index(user_profile.get("biological_sex")) if user_profile.get("biological_sex") else 0
+        )
 
         st.subheader("Dietary Restrictions")
         dietary_restrictions = st.multiselect(
@@ -193,6 +196,7 @@ def display_profile_page(users):
                 dietary_restrictions.remove("Other")
 
         st.subheader("Goal and Activity")
+        # You can keep your "goal" if you still want it
         goal = st.selectbox(
             "Goal",
             ["Cutting", "Bulking", "Maintenance", "Reverse Diet"],
@@ -200,6 +204,7 @@ def display_profile_page(users):
             if user_profile.get("goal")
             else 0,
         )
+
         activity_level = st.selectbox(
             "Activity Level",
             [
@@ -220,6 +225,22 @@ def display_profile_page(users):
             else 0,
         )
 
+        # New Rate of Progress
+        st.subheader("Rate of Progress")
+        # Example radio choices. Adjust text & values as needed
+        progress_options = [
+            "Lose 1 lb/week (recommended)",
+            "Lose 0.5 lb/week",
+            "Maintenance",
+            "Gain 0.5 lb/week",
+            "Gain 1 lb/week (recommended)"
+        ]
+        default_index = 2  # default "Maintenance"
+        if user_profile.get("rate_of_progress") in progress_options:
+            default_index = progress_options.index(user_profile["rate_of_progress"])
+
+        rate_of_progress = st.radio("Select your weekly weight change target:", progress_options, index=default_index)
+
         st.subheader("Protein Target")
         protein_target = st.slider(
             "Protein per lb of lean body mass",
@@ -228,7 +249,7 @@ def display_profile_page(users):
             value=float(user_profile.get("protein_target", 0.8)),
             step=0.1,
         )
-        
+
         st.subheader("Lean Body Mass")
         lean_body_mass = st.number_input(
             "Lean Body Mass (lbs) (Leave 0 if unknown)",
@@ -237,11 +258,10 @@ def display_profile_page(users):
             step=0.1,
         )
 
-        # Save Profile Button
         submit_button = st.form_submit_button("Save Profile")
 
+    # --- After Submit ---
     if submit_button:
-        # Update the user's profile
         user_profile["name"] = name
         user_profile["weight"] = weight
         user_profile["height"] = height
@@ -252,10 +272,25 @@ def display_profile_page(users):
         user_profile["activity_level"] = activity_level
         user_profile["protein_target"] = protein_target
         user_profile["lean_body_mass"] = lean_body_mass
+        user_profile["rate_of_progress"] = rate_of_progress
 
-        # Save the updated data (using the function from utils.py)
         save_user_data(users)
         st.success("Profile saved successfully!")
+
+        # Now automatically calculate macros (or you can do a separate button):
+        nutrition_coach = NutritionCoach()
+        users[user_id] = nutrition_coach.calculate_targets(users[user_id])
+        save_user_data(users)
+        st.success("Macro targets calculated!")
+
+    # --- Display Macro Targets if they exist ---
+    if "targets" in users[user_id]:
+        st.subheader("Your Current Macro Targets")
+        targets = users[user_id]["targets"]
+        st.write(f"**Calories:** {targets['calories']}")
+        st.write(f"**Protein:** {targets['protein']} g")
+        st.write(f"**Fat:** {targets['fat']} g")
+        st.write(f"**Carbohydrates:** {targets['carbohydrates']} g")
 
 def display_weekly_schedule_table(schedule_data, users, selected_user=None):
     """Displays the weekly schedule using Ag-Grid."""
@@ -341,21 +376,115 @@ def display_weekly_schedule_table(schedule_data, users, selected_user=None):
 def display_meal_plan_page(users):
     st.header("Meal Plan")
 
-    user_id = "user1"  # Replace with actual user ID later
+    user_id = "user1"  # Or however you're handling user login
     if user_id not in users or "profile" not in users[user_id] or "targets" not in users[user_id]:
         st.warning("Please complete your profile and calculate targets first.")
         return
 
-    num_days = st.number_input("Number of days for meal plan", min_value=1, max_value=7, value=3)
+    # Let user pick a start date and # days, or a date range
+    st.subheader("Meal Plan Parameters")
+    start_date = st.date_input("Select start date")
+    num_days = st.number_input("Number of days for meal plan", min_value=1, max_value=14, value=3)
+
+    # Example: checkboxes or radio for meal prep
+    meal_prep_lunch = st.checkbox("Meal Prep Lunch for all days?", value=False)
 
     if st.button("Generate Meal Plan"):
         nutrition_coach = NutritionCoach()
-        users[user_id] = nutrition_coach.generate_meal_plan(users[user_id], num_days)
+
+        # Store your date + meal prep flags if needed
+        users[user_id]["meal_plan_settings"] = {
+            "start_date": str(start_date),
+            "num_days": num_days,
+            "meal_prep_lunch": meal_prep_lunch
+        }
+
+        # Possibly pass meal_prep_lunch to your generate function
+        users[user_id] = nutrition_coach.generate_meal_plan(users[user_id], num_days, meal_prep=meal_prep_lunch)
+
         save_user_data(users)
         st.success("Meal plan generated!")
 
     # Display the meal plan if it exists
     if "meals" in users[user_id]:
-        display_weekly_schedule_table(users[user_id]["meals"], users, user_id)
+        # We pass the entire data structure to a function that renders the interactive table
+        display_interactive_meal_table(users[user_id]["meals"], users, user_id)
 
+def display_interactive_meal_table(schedule_data, users, user_id):
+    """
+    Display an AgGrid table of the meal plan with clickable rows.
+    When a row is selected, show detailed info in a separate container.
+    """
+    st.subheader("Your Meal Plan")
 
+    # Convert to a DataFrame for AgGrid
+    data = []
+    for day, meals in schedule_data.items():
+        for meal_type, meal_details in meals.items():
+            data.append({
+                "Day": day,
+                "Meal Type": meal_type,
+                "Meal Name": meal_details.get("meal_name", ""),
+                # We'll store the entire meal_details in a hidden column so we can reference later
+                "Meal Details": json.dumps(meal_details)  
+            })
+
+    df = pd.DataFrame(data)
+
+    # Build AgGrid config
+    gb = GridOptionsBuilder.from_dataframe(df)
+    gb.configure_default_column(
+        groupable=True, 
+        value=True, 
+        enableRowGroup=True, 
+        autoHeight=True, 
+        wrapText=True
+    )
+    gb.configure_selection("single")  # single row selection
+    gb.configure_grid_options(domLayout="normal")
+    gridOptions = gb.build()
+
+    grid_response = AgGrid(
+        df,
+        gridOptions=gridOptions,
+        data_return_mode=DataReturnMode.FILTERED_AND_SORTED,
+        update_mode=GridUpdateMode.SELECTION_CHANGED,
+        fit_columns_on_grid_load=True,
+        allow_unsafe_jscode=True,
+        enable_enterprise_modules=False,
+        height=350,
+        width="100%",
+        reload_data=False,
+    )
+
+    # Check if a row is selected
+    if grid_response and grid_response["selected_rows"]:
+        selected_row = grid_response["selected_rows"][0]  # single selection
+        meal_json_str = selected_row.get("Meal Details", "")
+        if meal_json_str:
+            meal_details = json.loads(meal_json_str)
+
+            # Display the detailed info here
+            st.markdown("### Selected Meal Details")
+            st.write(f"**Meal Name:** {meal_details.get('meal_name', '')}")
+            
+            # Ingredients
+            ingredients = meal_details.get("ingredients", [])
+            if ingredients:
+                st.subheader("Ingredients")
+                for ing in ingredients:
+                    # Expecting ing to look like: {"name": "...", "quantity": "..."}
+                    st.write(f"- **{ing['name']}**: {ing['quantity']}")
+
+            # Instructions
+            instructions = meal_details.get("instructions", "")
+            if instructions:
+                st.subheader("Instructions")
+                st.write(instructions)
+
+            # Macros
+            st.subheader("Macros")
+            st.write(f"Calories: {meal_details.get('calories', 0)}")
+            st.write(f"Protein: {meal_details.get('protein', 0)} g")
+            st.write(f"Fat: {meal_details.get('fat', 0)} g")
+            st.write(f"Carbs: {meal_details.get('carbohydrates', 0)} g")

@@ -10,8 +10,361 @@
             "goal": "Cutting",
             "activity_level": "Very Active",
             "protein_target": 1.0,
-            "lean_body_mass": 0.0
+            "lean_body_mass": 0.0,
+            "rate_of_progress": "Lose 1 lb/week (recommended)"
         },
-        "meals": {}
+        "meals": {
+            "Day 1": {
+                "Breakfast": {
+                    "meal_name": "High-Protein Breakfast Burrito",
+                    "ingredients": [
+                        "6 large eggs",
+                        "1 cup cooked black beans",
+                        "1 cup cooked brown rice",
+                        "1/2 cup diced bell peppers",
+                        "1/2 cup diced onions",
+                        "1/4 cup salsa",
+                        "2 whole wheat tortillas (large)",
+                        "1/4 cup low-fat shredded cheese"
+                    ],
+                    "instructions": "1. Scramble the eggs in a non-stick pan. 2. In a separate pan, saut\u00e9 the bell peppers and onions until softened. 3. Warm the tortillas in the microwave or on a dry skillet. 4. Divide the scrambled eggs, black beans, brown rice, saut\u00e9ed vegetables, and salsa evenly between the two tortillas. 5. Sprinkle the shredded cheese on top. 6. Fold the tortillas into burritos and enjoy.",
+                    "calories": 1079,
+                    "protein": 78.2,
+                    "fat": 16.4,
+                    "carbohydrates": 155.8
+                },
+                "Lunch": {
+                    "meal_name": "Grilled Chicken Salad with Quinoa and Avocado",
+                    "ingredients": [
+                        "8 oz grilled chicken breast",
+                        "2 cups mixed greens",
+                        "1 cup cooked quinoa",
+                        "1 avocado, sliced",
+                        "1/2 cup cherry tomatoes, halved",
+                        "1/4 cup sliced cucumber",
+                        "2 tbsp balsamic vinaigrette"
+                    ],
+                    "instructions": "1. Grill or bake the chicken breast until cooked through. 2. In a large bowl, combine the mixed greens, cooked quinoa, sliced avocado, cherry tomatoes, and sliced cucumber. 3. Top with the grilled chicken breast and drizzle with balsamic vinaigrette. Toss gently to combine.",
+                    "calories": 1079,
+                    "protein": 78.2,
+                    "fat": 16.1,
+                    "carbohydrates": 156.3
+                },
+                "Dinner": {
+                    "meal_name": "Grilled Chicken with Quinoa Salad",
+                    "ingredients": [
+                        "8 oz boneless, skinless chicken breasts",
+                        "1 cup cooked quinoa",
+                        "1 cup cherry tomatoes, halved",
+                        "1 cucumber, diced",
+                        "1/2 red onion, diced",
+                        "1/4 cup crumbled feta cheese",
+                        "1/4 cup chopped fresh parsley",
+                        "2 tbsp olive oil",
+                        "2 tbsp lemon juice",
+                        "1 tsp Dijon mustard",
+                        "Salt and pepper to taste"
+                    ],
+                    "instructions": "1. Preheat grill or grill pan to medium-high heat. Season chicken breasts with salt and pepper and grill until cooked through, about 6-8 minutes per side. 2. In a large bowl, combine cooked quinoa, cherry tomatoes, cucumber, red onion, feta cheese, and parsley. 3. In a small bowl, whisk together olive oil, lemon juice, Dijon mustard, and salt and pepper to taste. 4. Pour the dressing over the quinoa salad and toss to combine. 5. Serve the grilled chicken alongside the quinoa salad.",
+                    "calories": 1080,
+                    "protein": 78,
+                    "fat": 16,
+                    "carbohydrates": 156
+                }
+            },
+            "Day 2": {
+                "Breakfast": {
+                    "meal_name": "High-Protein Breakfast",
+                    "ingredients": [
+                        "2 cups cooked oatmeal",
+                        "1 cup low-fat Greek yogurt",
+                        "1 large banana, sliced",
+                        "1/4 cup almonds",
+                        "2 large eggs, scrambled",
+                        "2 slices whole-grain toast",
+                        "2 tablespoons peanut butter"
+                    ],
+                    "instructions": "1. Cook the oatmeal according to package instructions. 2. Top the oatmeal with Greek yogurt, sliced banana, and almonds. 3. Cook the scrambled eggs in a non-stick pan. 4. Toast the whole-grain bread and spread with peanut butter.",
+                    "calories": 1080,
+                    "protein": 78,
+                    "fat": 16,
+                    "carbohydrates": 156
+                },
+                "Lunch": {
+                    "meal_name": "High-Protein Veggie Stir-Fry with Brown Rice",
+                    "ingredients": [
+                        "1 cup brown rice",
+                        "1 tablespoon olive oil",
+                        "1 onion, sliced",
+                        "2 cloves garlic, minced",
+                        "1 red bell pepper, sliced",
+                        "1 cup broccoli florets",
+                        "1 cup sliced mushrooms",
+                        "1 cup firm tofu, cubed",
+                        "2 tablespoons soy sauce",
+                        "1 teaspoon sesame oil",
+                        "Salt and pepper to taste"
+                    ],
+                    "instructions": "1. Cook the brown rice according to package instructions. 2. Heat olive oil in a large skillet or wok over medium-high heat. 3. Add the sliced onion and minced garlic, and saut\u00e9 for 2 minutes. 4. Add the sliced bell pepper, broccoli florets, sliced mushrooms, and cubed tofu. Stir-fry for 5-7 minutes. 5. Add the soy sauce and sesame oil, and season with salt and pepper to taste. 6. Serve the stir-fry over the cooked brown rice.",
+                    "calories": 1080,
+                    "protein": 78,
+                    "fat": 16,
+                    "carbohydrates": 156
+                },
+                "Dinner": {
+                    "meal_name": "Grilled Chicken with Roasted Sweet Potatoes and Steamed Broccoli",
+                    "ingredients": [
+                        "8 oz boneless, skinless chicken breast",
+                        "2 medium sweet potatoes",
+                        "2 cups broccoli florets",
+                        "2 tbsp olive oil",
+                        "1 tsp dried thyme",
+                        "1 tsp dried rosemary",
+                        "Salt and pepper to taste"
+                    ],
+                    "instructions": "1. Preheat the oven to 400\u00b0F (200\u00b0C). 2. Cut the sweet potatoes into wedges and toss them with 1 tbsp olive oil, thyme, salt, and pepper. Spread them on a baking sheet and roast for 25-30 minutes, or until tender and lightly browned. 3. Season the chicken breast with rosemary, salt, and pepper. Grill or pan-sear the chicken until cooked through, about 6-8 minutes per side. 4. Steam the broccoli florets until tender-crisp, about 5-7 minutes. 5. Serve the grilled chicken with the roasted sweet potatoes and steamed broccoli.",
+                    "calories": 1080,
+                    "protein": 78,
+                    "fat": 16,
+                    "carbohydrates": 156
+                }
+            },
+            "Day 3": {
+                "Breakfast": {
+                    "meal_name": "High-Protein Breakfast Bowl",
+                    "ingredients": [
+                        "1 cup cooked quinoa",
+                        "1 cup cooked black beans",
+                        "1 cup spinach, saut\u00e9ed with garlic",
+                        "2 large eggs, scrambled",
+                        "1/2 avocado, sliced",
+                        "1 tablespoon pumpkin seeds",
+                        "1 tablespoon chia seeds",
+                        "1 tablespoon flaxseeds"
+                    ],
+                    "instructions": "Cook the quinoa and black beans according to package instructions. Saut\u00e9 the spinach with minced garlic until wilted. Scramble the eggs. In a bowl, combine the cooked quinoa, black beans, saut\u00e9ed spinach, scrambled eggs, avocado slices, pumpkin seeds, chia seeds, and flaxseeds. Mix well and enjoy!",
+                    "calories": 1079,
+                    "protein": 78,
+                    "fat": 16,
+                    "carbohydrates": 156
+                },
+                "Lunch": {
+                    "meal_name": "Grilled Chicken Salad with Quinoa and Avocado",
+                    "ingredients": [
+                        "8 oz grilled chicken breast",
+                        "1 cup cooked quinoa",
+                        "2 cups mixed greens",
+                        "1 cup cherry tomatoes",
+                        "1/2 avocado, sliced",
+                        "1/4 cup sliced almonds",
+                        "2 tbsp olive oil",
+                        "2 tbsp balsamic vinegar",
+                        "Salt and pepper to taste"
+                    ],
+                    "instructions": "1. Cook the quinoa according to package instructions and let it cool. 2. Grill or bake the chicken breast and slice it into strips. 3. In a large bowl, combine the mixed greens, cherry tomatoes, avocado slices, and sliced almonds. 4. Add the cooked quinoa and grilled chicken. 5. Drizzle with olive oil and balsamic vinegar, and season with salt and pepper. 6. Toss everything together and enjoy!",
+                    "calories": 1080,
+                    "protein": 78,
+                    "fat": 16,
+                    "carbohydrates": 156
+                },
+                "Dinner": {
+                    "meal_name": "Grilled Salmon with Quinoa and Roasted Vegetables",
+                    "ingredients": [
+                        "8 oz salmon fillet",
+                        "1 cup quinoa",
+                        "2 cups vegetable broth",
+                        "1 red bell pepper",
+                        "1 zucchini",
+                        "1 red onion",
+                        "2 tablespoons olive oil",
+                        "Salt and pepper to taste",
+                        "1 lemon, cut into wedges"
+                    ],
+                    "instructions": "1. Preheat oven to 400\u00b0F (200\u00b0C). 2. Cook quinoa according to package instructions, using vegetable broth instead of water. 3. Cut bell pepper, zucchini, and onion into bite-sized pieces. Toss with olive oil, salt, and pepper. Spread on a baking sheet and roast for 20-25 minutes. 4. Season salmon with salt and pepper. Grill or bake until cooked through, about 10-12 minutes. 5. Serve salmon over quinoa, with roasted vegetables on the side. Squeeze lemon wedges over the top.",
+                    "calories": 1077,
+                    "protein": 77.6,
+                    "fat": 16.4,
+                    "carbohydrates": 155.8
+                }
+            },
+            "Day 4": {
+                "Breakfast": {
+                    "meal_name": "High-Protein Breakfast Burrito Bowl",
+                    "ingredients": [
+                        "1 cup cooked quinoa",
+                        "6 large egg whites",
+                        "4 oz lean turkey breast, cooked and diced",
+                        "1/2 cup black beans, rinsed and drained",
+                        "1/2 cup diced tomatoes",
+                        "1/4 cup diced onions",
+                        "1/4 cup diced bell peppers",
+                        "2 tbsp salsa",
+                        "1/4 cup low-fat shredded cheddar cheese"
+                    ],
+                    "instructions": "1. Cook the quinoa according to package instructions. 2. Scramble the egg whites in a non-stick pan. 3. In a large bowl, combine the cooked quinoa, scrambled egg whites, diced turkey breast, black beans, tomatoes, onions, and bell peppers. 4. Top with salsa and shredded cheddar cheese. 5. Enjoy!",
+                    "calories": 1080,
+                    "protein": 78,
+                    "fat": 16,
+                    "carbohydrates": 156
+                },
+                "Lunch": {
+                    "meal_name": "Grilled Chicken Salad with Quinoa and Roasted Vegetables",
+                    "ingredients": [
+                        "8 oz grilled chicken breast",
+                        "1 cup cooked quinoa",
+                        "1 cup roasted bell peppers",
+                        "1 cup roasted zucchini",
+                        "1 cup cherry tomatoes",
+                        "1/4 cup sliced almonds",
+                        "2 tbsp olive oil",
+                        "2 tbsp balsamic vinegar",
+                        "1 tsp Dijon mustard",
+                        "Salt and pepper to taste"
+                    ],
+                    "instructions": "1. Cook quinoa according to package instructions and set aside. 2. Grill or pan-sear chicken breast until fully cooked. 3. Roast bell peppers and zucchini in the oven at 400\u00b0F for 20-25 minutes. 4. In a large bowl, combine cooked quinoa, grilled chicken, roasted vegetables, cherry tomatoes, and sliced almonds. 5. In a small bowl, whisk together olive oil, balsamic vinegar, Dijon mustard, salt, and pepper. 6. Drizzle the dressing over the salad and toss to combine. Serve chilled or at room temperature.",
+                    "calories": 1081,
+                    "protein": 78.5,
+                    "fat": 16.3,
+                    "carbohydrates": 156.2
+                },
+                "Dinner": {
+                    "meal_name": "Grilled Salmon with Quinoa and Roasted Vegetables",
+                    "ingredients": [
+                        "8 oz salmon fillet",
+                        "1 cup cooked quinoa",
+                        "1 bell pepper, sliced",
+                        "1 zucchini, sliced",
+                        "1 red onion, sliced",
+                        "2 tbsp olive oil",
+                        "1 tsp garlic powder",
+                        "Salt and pepper to taste"
+                    ],
+                    "instructions": "1. Preheat oven to 400\u00b0F (200\u00b0C). 2. Toss the sliced vegetables with 1 tbsp olive oil, garlic powder, salt, and pepper. Spread on a baking sheet and roast for 20-25 minutes. 3. Brush the salmon with the remaining 1 tbsp olive oil and season with salt and pepper. Grill or pan-fry the salmon until cooked through. 4. Serve the grilled salmon with the roasted vegetables and cooked quinoa.",
+                    "calories": 1080,
+                    "protein": 78,
+                    "fat": 16,
+                    "carbohydrates": 156
+                }
+            },
+            "Day 5": {
+                "Breakfast": {
+                    "meal_name": "High-Protein Breakfast Bowl",
+                    "ingredients": [
+                        "1 cup (180g) cooked quinoa",
+                        "1 cup (240g) non-fat Greek yogurt",
+                        "1/2 cup (120g) cottage cheese",
+                        "1 scoop (30g) whey protein powder",
+                        "1 banana, sliced",
+                        "1/2 cup (75g) fresh berries (e.g., blueberries, raspberries)",
+                        "2 tablespoons (14g) sliced almonds",
+                        "1 tablespoon (15ml) honey"
+                    ],
+                    "instructions": "In a large bowl, combine the cooked quinoa, Greek yogurt, cottage cheese, and whey protein powder. Mix well. Top with sliced banana, fresh berries, sliced almonds, and a drizzle of honey.",
+                    "calories": 1080,
+                    "protein": 78,
+                    "fat": 16,
+                    "carbohydrates": 156
+                },
+                "Lunch": {
+                    "meal_name": "Grilled Chicken Salad with Quinoa and Avocado",
+                    "ingredients": [
+                        "8 oz boneless, skinless chicken breast",
+                        "1 cup cooked quinoa",
+                        "2 cups mixed greens",
+                        "1 cup cherry tomatoes, halved",
+                        "1/2 avocado, diced",
+                        "1/4 cup sliced almonds",
+                        "2 tbsp balsamic vinegar",
+                        "1 tbsp olive oil",
+                        "Salt and pepper to taste"
+                    ],
+                    "instructions": "1. Season the chicken breast with salt and pepper, and grill or bake until cooked through. 2. In a large bowl, combine the cooked quinoa, mixed greens, cherry tomatoes, avocado, and sliced almonds. 3. Slice the cooked chicken and add it to the bowl. 4. Drizzle with balsamic vinegar and olive oil, and toss to combine. 5. Season with additional salt and pepper to taste.",
+                    "calories": 1082,
+                    "protein": 78,
+                    "fat": 16,
+                    "carbohydrates": 156
+                },
+                "Dinner": {
+                    "meal_name": "Grilled Chicken with Quinoa and Roasted Vegetables",
+                    "ingredients": [
+                        "8 oz boneless, skinless chicken breasts",
+                        "1 cup uncooked quinoa",
+                        "2 cups broccoli florets",
+                        "1 red bell pepper, sliced",
+                        "1 small zucchini, sliced",
+                        "1 tablespoon olive oil",
+                        "1 teaspoon dried thyme",
+                        "Salt and pepper to taste"
+                    ],
+                    "instructions": "1. Preheat oven to 400\u00b0F (200\u00b0C). 2. Cook quinoa according to package instructions. 3. Toss broccoli, bell pepper, and zucchini with olive oil, thyme, salt, and pepper. Spread on a baking sheet and roast for 20-25 minutes. 4. Grill or pan-sear chicken until cooked through. 5. Serve grilled chicken with quinoa and roasted vegetables.",
+                    "calories": 1076,
+                    "protein": 77.6,
+                    "fat": 15.8,
+                    "carbohydrates": 155.7
+                }
+            },
+            "Day 6": {
+                "Breakfast": {
+                    "meal_name": "Protein-Packed Breakfast",
+                    "ingredients": [
+                        "2 cups cooked steel-cut oats",
+                        "1 cup low-fat Greek yogurt",
+                        "1 cup mixed berries (such as blueberries, raspberries, and strawberries)",
+                        "1/2 cup unsweetened almond milk",
+                        "2 large eggs",
+                        "4 slices whole-wheat toast",
+                        "2 tablespoons natural peanut butter"
+                    ],
+                    "instructions": "1. Cook the steel-cut oats according to package instructions. 2. In a bowl, mix together the cooked oats, Greek yogurt, mixed berries, and almond milk. 3. Cook the eggs to your desired style (scrambled, fried, or poached). 4. Toast the whole-wheat bread and spread with peanut butter. 5. Serve the oat mixture, eggs, and toast together for a balanced breakfast.",
+                    "calories": 1080,
+                    "protein": 78,
+                    "fat": 16,
+                    "carbohydrates": 156
+                },
+                "Lunch": {
+                    "meal_name": "Grilled Chicken Salad with Quinoa and Avocado",
+                    "ingredients": [
+                        "8 oz boneless, skinless chicken breast",
+                        "1 cup cooked quinoa",
+                        "2 cups mixed greens",
+                        "1 cup cherry tomatoes, halved",
+                        "1/2 avocado, sliced",
+                        "1/4 cup sliced almonds",
+                        "2 tbsp olive oil",
+                        "2 tbsp balsamic vinegar",
+                        "Salt and pepper to taste"
+                    ],
+                    "instructions": "1. Grill or bake the chicken breast until cooked through. Allow to cool, then slice or shred. 2. In a large bowl, combine the cooked quinoa, mixed greens, cherry tomatoes, avocado slices, and sliced almonds. 3. In a small bowl, whisk together the olive oil, balsamic vinegar, salt, and pepper. 4. Add the sliced chicken to the salad and drizzle with the vinaigrette. Toss to combine.",
+                    "calories": 1080,
+                    "protein": 78,
+                    "fat": 16,
+                    "carbohydrates": 156
+                },
+                "Dinner": {
+                    "meal_name": "Grilled Chicken with Quinoa and Roasted Vegetables",
+                    "ingredients": [
+                        "8 oz boneless, skinless chicken breasts",
+                        "1 cup cooked quinoa",
+                        "1 red bell pepper, sliced",
+                        "1 zucchini, sliced",
+                        "1 red onion, sliced",
+                        "2 tablespoons olive oil",
+                        "1 teaspoon dried thyme",
+                        "Salt and pepper to taste"
+                    ],
+                    "instructions": "1. Preheat grill or grill pan to medium-high heat. Season chicken with salt, pepper, and dried thyme. Grill chicken until cooked through, about 6-8 minutes per side. Let rest for 5 minutes, then slice into strips. 2. Preheat oven to 400\u00b0F. Toss vegetables with olive oil, salt, and pepper. Spread on a baking sheet and roast for 20-25 minutes, stirring occasionally, until tender and lightly browned. 3. Serve grilled chicken over quinoa, topped with roasted vegetables.",
+                    "calories": 1078,
+                    "protein": 78.3,
+                    "fat": 16.1,
+                    "carbohydrates": 155.7
+                }
+            }
+        },
+        "targets": {
+            "calories": 3240,
+            "protein": 235,
+            "fat": 48,
+            "carbohydrates": 468
+        }
     }
 }
