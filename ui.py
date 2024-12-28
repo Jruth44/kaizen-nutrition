@@ -9,15 +9,138 @@ from datetime import datetime
 
 def display_tracker_page(users):
     """Displays the food tracker page."""
-    # ... (Implementation later)
+    st.header("Food Tracker")
+
+    user_id = "user1"  # Replace with actual user ID later
+    if user_id not in users:
+        st.warning("No user profile found. Please create one under 'Profile'.")
+        return
+
+    # Initialize a 'food_log' key if it doesn't exist
+    if "food_log" not in users[user_id]:
+        users[user_id]["food_log"] = []
+
+    # Input form for adding a new food entry
+    with st.form("food_entry_form"):
+        st.subheader("Log a New Food Item")
+        food_item = st.text_input("Food Item (e.g., 'Chicken Breast')")
+        calories = st.number_input("Calories", min_value=0, value=0)
+        protein = st.number_input("Protein (g)", min_value=0, value=0)
+        fat = st.number_input("Fat (g)", min_value=0, value=0)
+        carbs = st.number_input("Carbohydrates (g)", min_value=0, value=0)
+        quantity = st.number_input("Quantity / Serving Size", min_value=1, value=1)
+
+        submitted = st.form_submit_button("Add to Tracker")
+        if submitted:
+            # Append the entry to the user's food log
+            entry = {
+                "timestamp": datetime.now().isoformat(),
+                "food_item": food_item,
+                "calories": calories,
+                "protein": protein,
+                "fat": fat,
+                "carbs": carbs,
+                "quantity": quantity,
+            }
+            users[user_id]["food_log"].append(entry)
+            save_user_data(users)
+            st.success(f"Added {food_item} to the tracker!")
+
+    # Display the current food log in a table
+    if users[user_id]["food_log"]:
+        st.subheader("Your Logged Foods")
+        df_log = pd.DataFrame(users[user_id]["food_log"])
+        AgGrid(df_log, fit_columns_on_grid_load=True)
+    else:
+        st.info("No foods logged yet.")
+
+    if users[user_id]["food_log"]:
+        st.subheader("Analyze a Food Entry")
+        selected_entry = st.selectbox(
+            "Select an entry to analyze",
+            options=[f'{i}: {e["food_item"]}' for i, e in enumerate(users[user_id]["food_log"])]
+        )
+        if st.button("Analyze Selected Entry"):
+            idx = int(selected_entry.split(":")[0])
+            entry_text = users[user_id]["food_log"][idx]["food_item"]
+            nutrition_coach = NutritionCoach()
+            analysis_result = nutrition_coach.analyze_food_entry(users[user_id], entry_text)
+            st.json(analysis_result)
 
 def display_coach_page(users):
     """Displays the AI/human coach interaction page."""
-    # ... (Implementation later)
+    st.header("Ask the Coach")
+
+    user_id = "user1"  # Replace with actual user ID later
+    if user_id not in users:
+        st.warning("No user profile found. Please create one under 'Profile'.")
+        return
+
+    # Initialize a conversation history if not present
+    if "coach_chat" not in users[user_id]:
+        users[user_id]["coach_chat"] = []
+
+    # Chat display
+    for msg in users[user_id]["coach_chat"]:
+        if msg["role"] == "user":
+            st.markdown(f"**You:** {msg['content']}")
+        else:
+            st.markdown(f"**Coach:** {msg['content']}")
+
+    # User input form
+    with st.form("coach_form"):
+        user_message = st.text_area("Type your question or message to the coach")
+        submitted = st.form_submit_button("Send")
+        if submitted and user_message.strip():
+            # Append user message to conversation
+            users[user_id]["coach_chat"].append({"role": "user", "content": user_message})
+
+            # Get AI response
+            nutrition_coach = NutritionCoach()
+            response = nutrition_coach.get_ai_coach_response(users[user_id], user_message)
+            # Append coach response
+            users[user_id]["coach_chat"].append({"role": "assistant", "content": response})
+
+            save_user_data(users)
+            st.experimental_rerun()  # Refresh to show updated conversation
+
 
 def display_calendar_page(users):
     """Displays the meal planning calendar."""
-    # ... (Implementation later)
+    st.header("Calendar")
+
+    user_id = "user1"  # Replace with actual user ID later
+    if user_id not in users:
+        st.warning("No user profile found. Please create one under 'Profile'.")
+        return
+
+    # For demonstration, let's assume the meal plan was stored in `users[user_id]["meals"]`.
+    # We'll show the schedule in a tabular format, similar to display_weekly_schedule_table().
+
+    if "meals" not in users[user_id] or not users[user_id]["meals"]:
+        st.info("No meal plan found. Generate one under the 'Meal Plan' page.")
+        return
+
+    st.subheader("Your Weekly Meal Calendar")
+    meal_plan = users[user_id]["meals"]  # This is a dict with Day X => {Breakfast, Lunch, ...}
+
+    # Convert to a format suitable for displaying with AgGrid
+    data = []
+    for day, meals in meal_plan.items():
+        for meal_type, meal_details in meals.items():
+            data.append({
+                "Day": day,
+                "Meal Type": meal_type,
+                "Meal Name": meal_details["meal_name"],
+                "Instructions": meal_details["instructions"]
+            })
+
+    df = pd.DataFrame(data)
+
+    if not df.empty:
+        AgGrid(df, fit_columns_on_grid_load=True)
+    else:
+        st.info("No data to display.")
 
 def display_group_page(users):
     """Displays the group interaction page."""

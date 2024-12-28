@@ -1,0 +1,17 @@
+{
+    "user1": {
+        "profile": {
+            "name": "John",
+            "weight": 235.0,
+            "height": 77,
+            "age": 25,
+            "biological_sex": "Male",
+            "dietary_restrictions": [],
+            "goal": "Cutting",
+            "activity_level": "Very Active",
+            "protein_target": 1.0,
+            "lean_body_mass": 0.0
+        },
+        "meals": {}
+    }
+}

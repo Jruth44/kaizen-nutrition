@@ -160,9 +160,88 @@ Provide the meal suggestion in the following JSON format:
         return user_data
 
     def analyze_food_entry(self, user_data: Dict, food_entry: str) -> Dict:
-        """Analyzes a user's food entry using the Anthropic API."""
-        # ... (Implementation later)
+            """
+            Analyzes a user's food entry using the Anthropic API.
+            For example, you might ask the AI to estimate macros, highlight any issues,
+            or provide suggestions for healthier alternatives.
+            """
+
+            system_prompt = (
+                "You are a highly skilled nutritionist. The user will provide a description "
+                "of a food item or meal they consumed. Analyze the meal with respect to "
+                "its nutritional content, healthiness, and alignment with the user's goals."
+            )
+
+            user_profile = user_data.get("profile", {})
+            user_goal = user_profile.get("goal", "Maintenance")
+
+            prompt = f"""
+    Analyze the following meal/food entry in the context of a user whose goal is '{user_goal}'.
+    User's food entry: "{food_entry}"
+
+    Respond in JSON with:
+    - "analysis": A brief analysis of whether this is healthy or not and how it fits the user's goal
+    - "recommendations": Suggestions on how to modify or improve the meal
+            """
+
+            try:
+                message = self.client.messages.create(
+                    model="claude-2.0",  # Or whichever Anthropic model you have
+                    max_tokens=500,
+                    temperature=0.7,
+                    system=system_prompt,
+                    messages=[
+                        {"role": "user", "content": prompt}
+                    ]
+                )
+
+                if isinstance(message.content, list):
+                    content = message.content[0].text
+                else:
+                    content = message.content
+
+                return json.loads(content)
+
+            except Exception as e:
+                st.error(f"An error occurred while analyzing the food entry: {e}")
+                return {
+                    "analysis": "Error occurred.",
+                    "recommendations": []
+                }
 
     def get_ai_coach_response(self, user_data: Dict, user_message: str) -> str:
-        """Gets a response from the AI coach based on user data and a message."""
-        # ... (Implementation later)
+        """
+        Gets a response from the AI coach based on user data and a message.
+        We pass some user info and goals to contextualize the response.
+        """
+
+        system_prompt = (
+            "You are a helpful AI nutrition coach. You have access to the user's profile data: "
+            f"{json.dumps(user_data.get('profile', {}), indent=2)} "
+            "Be informative, motivational, and accurate in your responses."
+        )
+
+        try:
+            message = self.client.messages.create(
+                model="claude-2.0",
+                max_tokens=500,
+                temperature=0.7,
+                system=system_prompt,
+                messages=[
+                    {
+                        "role": "user",
+                        "content": user_message
+                    }
+                ]
+            )
+
+            if isinstance(message.content, list):
+                content = message.content[0].text
+            else:
+                content = message.content
+
+            return content
+
+        except Exception as e:
+            st.error(f"An error occurred while getting AI coach response: {e}")
+            return "Sorry, I encountered an error while processing your request."

@@ -6,8 +6,11 @@ from ui import (
     display_calendar_page,
     display_group_page,
     display_profile_page,
+    display_meal_plan_page
 )
 from utils import load_user_data, save_user_data
+from models import NutritionCoach
+
 
 def main():
     st.title("Nutrition Coach App")
